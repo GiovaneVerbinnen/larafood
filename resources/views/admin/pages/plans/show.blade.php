@@ -18,7 +18,7 @@
             <form action="{{ route('plans.destroy', $plan->url)}}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Deletar</button>
+                <button type="submit" class="btn btn-danger mt-4">Deletar</button>
             </form>
         </ul>
     </div>

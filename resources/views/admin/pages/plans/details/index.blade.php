@@ -1,56 +1,40 @@
 @extends('adminlte::page')
 
-@section('title', 'Planos')
+@section('title', "Detalhes do plano {$plan->name}")
 
 @section('content_header')
 <ol class="breadcrumb my-2">
     <li class="breadcrumb-item"><a href=" {{route('admin.index')  }} ">Dasboard</a></li>
-    <li class="breadcrumb-item active"><a href=" {{route('plans.index')  }} ">Planos</a></li>
+    <li class="breadcrumb-item"><a href=" {{route('plans.index')  }} ">Planos</a></li>
+    <li class="breadcrumb-item"><a href=" {{route('plans.show')  }} ">{{$plan->name}}</a></li>
+    <li class="breadcrumb-item active"><a href=" {{route('details.plans.index', $plan->url)  }} ">Planos</a></li>
 </ol>
 
-<h1>Planos
-    <a href="{{ route('plans.create')}}" class="btn btn-sm btn-outline-primary ">
-        <i class="fas fa-plus"></i>
-        Add</a></h1>
+<h1>Detalhes</h1>
 
 @stop
 
 
 @section('content')
-<p>Listagem dos planos</p>
 <div class="card">
-    <div class="card-header">
-        <form action="{{ route('plans.search') }}" method="POST" class="form form-inline">
-            @csrf
-            <div class="form-group">
-                <input type="text" name="filter" placeholder="Pesquisa" value="{{$filters['filter'] ?? ''}}"
-                    class="form-control">
-                <button type="submit" class="btn btn-outline-dark mx-2"> <i class="fas fa-search"></i> Filtrar</button>
-                <button type="button" class="btn  mx-2">Limpar Filtros</button>
-            </div>
-        </form>
-    </div>
+
     <div class="card-body">
         <table class="table table condensed">
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Preço</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 @if ($plans)
-                @foreach ($plans as $plan)
+                @foreach ($details as $detail)
                 <tr>
-                    <td>{{$plan->name}}</td>
-                    <td>R$ {{number_format($plan->price, 2, ',', '.')}}</td>
                     <td>
-                        <a href="{{route('details.plan.index', $plan->url)}}"
-                            class="btn btn-sm btn-success">Detalhes</a>
+                        <a href="{{route('details.plan.index', $plan->url)}}" class="btn btn-sm btn-primary">Ver</a>
                     </td>
                     <td>
-                        <a href="{{route('plans.show', $plan->url)}}" class="btn btn-sm btn-primary">Ver</a>
+                        <a href="{{route('plans.show', $plan->url)}}" class="btn btn-sm btn-success">Ver</a>
                     </td>
                     <td>
                         <a href="{{route('plan.edit', $plan->url)}}" class="btn btn-sm btn-warning">Editar</a>
@@ -72,9 +56,9 @@
     </div>
     <div class="card-footer">
         @if (isset($filters))
-        {!! $plans->appends($filters)->links() !!}
+        {!! $details->appends($filters)->links() !!}
         @else
-        {!! $plans->links() !!}
+        {!! $details->links() !!}
         @endif
     </div>
 </div>
