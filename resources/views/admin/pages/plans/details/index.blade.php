@@ -54,12 +54,12 @@
             </tbody>
         </table>
     </div>
-    <div class="card-footer">
+    {{-- <div class="card-footer">
         @if (isset($filters))
-        {!! $details->appends($filters)->links() !!}
+        {!! $plans->appends($filters)->links() !!}
         @else
-        {!! $details->links() !!}
+        {!! $plans->links() !!}
         @endif
-    </div>
+    </div> --}}
 </div>
 @stop
